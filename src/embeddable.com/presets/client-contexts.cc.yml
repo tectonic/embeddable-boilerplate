@@ -1,0 +1,7 @@
+- name: Default
+  clientContext:
+    theme: 'default'
+
+- name: Example
+  clientContext:
+    theme: 'example'
