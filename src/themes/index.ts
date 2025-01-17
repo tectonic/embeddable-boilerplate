@@ -54,6 +54,6 @@ export type ThemePartial = ThemeDeepPartial<Theme>;
 // It's used in override.config.ts so that you don't have to import every single theme
 // in that file.
 export default {
-  celtics: exampleTheme,
+  example: exampleTheme,
   default: defaultTheme,
 };
