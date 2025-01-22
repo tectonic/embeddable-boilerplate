@@ -1,8 +1,12 @@
+# Security Context is private info that can be used to customize the embeddable experience.
+# This context is only accessible within Cube models and enables row-level security. Note
+# that this file is only used by the builder.
+# See () for documentation.
 - name: Example customer 1
   securityContext:
     country: United States
   environment: default
-    
+
 - name: Example customer 2
   securityContext:
     country: Germany

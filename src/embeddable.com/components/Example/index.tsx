@@ -1,20 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { useOverrideConfig } from '@embeddable.com/react';
+import { Container, Theme } from 'vanilla-components';
 
-// Note - coming soon
-// import { Container } from 'vanilla-components';
-
-const Container = (props: { title?: string; children: React.ReactNode }) => {
-  return (
-    <div className="w-full p-4 bg-[#F5F7F9] rounded-xl">
-      {props.title && (
-        <div className="text-[#6B778C] text-sm font-medium">{props.title}</div>
-      )}
-      {props.children}
-    </div>
-  );
-};
-
+// These props come from the associated .emb.ts file
 type Props = {
   onChange: (v: string) => void;
   title?: string;
@@ -22,8 +10,16 @@ type Props = {
   placeholder: string;
 };
 
+// We define this here because different components may pull in different overrides
+type Overrides = {
+  theme: Theme;
+};
+
+// The container component is a wrapper. It's not required but it includes things like the
+// Download as CVS/PNG menu. We recommend using it around any charts/graphs/tables.
 export default (props: Props) => {
-  const overrides: any = useOverrideConfig();
+  const overrides: Overrides = useOverrideConfig() as Overrides;
+
   // You can use the theme object to style your component
   const { theme } = overrides;
 

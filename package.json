@@ -1,18 +1,19 @@
 {
-  "name": "Chris Embeddable Dev",
+  "name": "Embeddable.com Boilerplate Repo",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.1.0",
   "type": "module",
   "engines": {
     "npm": ">=9.0.0",
     "node": ">=18.0.0"
   },
   "scripts": {
+    "ct": "tsconfig --noEmit",
+    "dev": "cross-env NODE_OPTIONS='--max-old-space-size=4096' embeddable dev",
     "embeddable:build": "embeddable build",
-    "embeddable:push": "embeddable push",
-    "embeddable:login": "embeddable login",
     "embeddable:dev": "cross-env NODE_OPTIONS='--max-old-space-size=4096' embeddable dev",
-    "dev": "cross-env NODE_OPTIONS='--max-old-space-size=4096' embeddable dev"
+    "embeddable:login": "embeddable login",
+    "embeddable:push": "embeddable push"
   },
   "dependencies": {
     "@stencil/core": "^4.23.0",

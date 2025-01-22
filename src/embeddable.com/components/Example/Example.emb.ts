@@ -7,6 +7,8 @@
  *
  * Want to learn more? Visit https://docs.embeddable.com
  */
+
+// Module Imports
 import { Value } from '@embeddable.com/core';
 import {
   EmbeddedComponentMeta,
@@ -14,8 +16,11 @@ import {
   defineComponent,
 } from '@embeddable.com/react';
 
+// Local Imports
 import Component from './index';
 
+// Define component meta
+// this handles the component's appearance and functionality in the builder
 export const meta = {
   name: 'Example',
   label: 'Example Component',
@@ -66,6 +71,7 @@ export const meta = {
   ],
 } as const satisfies EmbeddedComponentMeta;
 
+// Adds all inputs as props, and maps the onChange event to the value prop
 export default defineComponent(Component, meta, {
   props: (inputs: Inputs<typeof meta>) => ({
     ...inputs,

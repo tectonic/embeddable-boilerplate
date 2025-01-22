@@ -1,6 +1,5 @@
 import { defineConfig } from '@embeddable.com/sdk-core';
 import react from '@embeddable.com/sdk-react';
-import themes from './src/themes';
 
 export default defineConfig({
   plugins: [react],
@@ -9,19 +8,22 @@ export default defineConfig({
   presetsSrc: './src/embeddable.com/presets',
   errorFallbackComponent:
     './src/embeddable.com/components/util/ErrorHandler.jsx',
-  // componentLibraries: [{
-  //   name: '@mikhail-terekhov/vanilla-components',
-  //   include: ['BarChart', 'DateRangePicker']
-  // }],
   componentLibraries: ['vanilla-components'],
 
-  //
+  /* Note: if you wish to include only certain components from a library, you can specify
+   * them like so:
+   *
+   * componentLibraries: [{
+   *   name: 'vanilla-components',
+   *   include: ['BarChart', 'DateRangePicker']
+   * }],
+   */
+
   // Uncomment for US deployments
   //
   // previewBaseUrl: 'https://app.us.embeddable.com',
   // pushBaseUrl: 'https://api.us.embeddable.com',
 
-  //
   // Uncomment for EU deployments
   //
   // previewBaseUrl: 'https://app.eu.embeddable.com',
