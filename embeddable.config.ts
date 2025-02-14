@@ -6,8 +6,7 @@ export default defineConfig({
   modelsSrc: './src/embeddable.com/models',
   componentsSrc: './src/embeddable.com/components',
   presetsSrc: './src/embeddable.com/presets',
-  errorFallbackComponent:
-    './src/embeddable.com/components/util/ErrorHandler.jsx',
+  errorFallbackComponent: './src/embeddable.com/components/util/ErrorHandler',
   componentLibraries: ['vanilla-components'],
 
   /* Note: if you wish to include only certain components from a library, you can specify

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useOverrideConfig } from '@embeddable.com/react';
+import { useTheme } from '@embeddable.com/react';
 import { Container, Theme } from 'vanilla-components';
 
 // These props come from the associated .emb.ts file
@@ -10,18 +10,12 @@ type Props = {
   placeholder: string;
 };
 
-// We define this here because different components may pull in different overrides
-type Overrides = {
-  theme: Theme;
-};
-
 // The container component is a wrapper. It's not required but it includes things like the
 // Download as CVS/PNG menu. We recommend using it around any charts/graphs/tables.
-export default (props: Props) => {
-  const overrides: Overrides = useOverrideConfig() as Overrides;
-
+const ExampleComponent: React.FC = (props: Props) => {
   // You can use the theme object to style your component
-  const { theme } = overrides;
+  const theme: Theme = useTheme() as Theme;
+  console.log('client theme', theme);
 
   return (
     <Container title={props.title}>
@@ -35,3 +29,5 @@ export default (props: Props) => {
     </Container>
   );
 };
+
+export default ExampleComponent;
