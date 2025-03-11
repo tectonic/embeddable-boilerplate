@@ -16,6 +16,7 @@
     "embeddable:push": "embeddable push"
   },
   "dependencies": {
+    "@fontsource/cinzel": "^5.2.5",
     "@stencil/core": "^4.23.0",
     "chart.js": "^4.4.0",
     "mergician": "^2.0.2",
