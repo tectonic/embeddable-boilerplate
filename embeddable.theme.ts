@@ -3,7 +3,7 @@ import { mergician } from 'mergician';
 import { Theme } from 'vanilla-components';
 
 const themeProvider = (clientContext: any, parentTheme: Theme): any => {
-  console.log('clientContext', clientContext);
+  console.log('parentTheme', parentTheme);
   /* Temp - remove this */
   //
   if (clientContext.theme === 'default') {
@@ -27,6 +27,9 @@ const themeProvider = (clientContext: any, parentTheme: Theme): any => {
         '#006638',
         '#004d2a',
       ],
+      kpi: {
+        alignment: 'left',
+      },
     },
     controls: {
       buttons: {
