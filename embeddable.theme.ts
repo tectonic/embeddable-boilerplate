@@ -3,14 +3,6 @@ import { mergician } from 'mergician';
 import { Theme } from 'vanilla-components';
 
 const themeProvider = (clientContext: any, parentTheme: Theme): any => {
-  console.log('parentTheme', parentTheme);
-  /* Temp - remove this */
-  //
-  if (clientContext.theme === 'default') {
-    return parentTheme;
-  }
-  //
-  /* Temp - remove this */
   const theme = mergician(parentTheme, {
     brand: {
       primary: '#008348',
