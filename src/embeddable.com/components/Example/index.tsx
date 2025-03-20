@@ -17,10 +17,21 @@ const ExampleComponent: React.FC<Props> = (props) => {
   const theme: Theme = useTheme() as Theme;
   console.log('client theme', theme);
 
+  // NOTE: currently we're not getting theme values in custom components. This is a bug.
+  // Mikhail will fix it when he gets back from vacation.
   return (
     <Container title={props.title}>
       <div
-        className={`w-full relative rounded-xl bg-white border border-[${theme.borders.colors.primary}] pr-8 h-10`}
+        className={`
+          bg-white 
+          border
+          h-10
+          pr-8
+          relative
+          rounded-xl
+          w-full
+          border-[${theme.controls.borders.colors.lightGray}]
+        `}
       >
         <span style={{ color: theme.brand.primary }}>Primary Brand Color!</span>
         <br />

@@ -1,4 +1,4 @@
-import '@fontsource/cinzel';
+import '@fontsource/anton';
 import { mergician } from 'mergician';
 import { Theme } from 'vanilla-components';
 
@@ -27,9 +27,53 @@ const themeProvider = (clientContext: any, parentTheme: Theme): any => {
         '#006638',
         '#004d2a',
       ],
+      /* Custom overrides for certain charts */
+      bar: {
+        borderRadius: 10,
+        borderWidth: 0,
+        colors: ['#fe76bd', '#cca9fd', '#9faff9'],
+        font: {
+          size: 12,
+        },
+      },
+      bubble: {
+        colors: ['#fcdb6c', '#fcc270', '#f9976c', '#fd746e'],
+        font: {
+          size: 12,
+        },
+      },
       kpi: {
         alignment: 'left',
+        font: {
+          negativeColor: '#FF6B6C',
+          size: 32,
+        },
       },
+      line: {
+        colors: ['#bcf879', '#d0e967', '#f5ef54'],
+        font: {
+          size: 12,
+        },
+        lineTension: 0.1,
+      },
+      pie: {
+        colors: [
+          '#fe76bd',
+          '#cca9fd',
+          '#9faff9',
+          '#77cdf8',
+          '#79f0ef',
+          '#61f48c',
+          '#fcdb6c',
+          '#fcc270',
+          '#f9976c',
+          '#fd746e',
+        ],
+        font: {
+          size: 12,
+        },
+      },
+      /* End custom chart overrides */
     },
     controls: {
       buttons: {
@@ -72,7 +116,7 @@ const themeProvider = (clientContext: any, parentTheme: Theme): any => {
       },
     },
     font: {
-      family: 'cinzel',
+      // family: 'Anton',
     },
     isParent: false,
   });
