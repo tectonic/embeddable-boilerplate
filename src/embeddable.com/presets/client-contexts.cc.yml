@@ -1,5 +1,5 @@
 # Client Context is front-facing info that can be used to customize the embeddable experience.
-# Common exampls include language and currency. Note that this file is only used by the builder.
+# Common examples include language and currency. Note that this file is only used by the builder.
 # See () for documentation.
 - name: Default
   clientContext:

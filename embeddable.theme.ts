@@ -1,8 +1,7 @@
-import '@fontsource/anton';
 import { mergician } from 'mergician';
 import { Theme } from 'vanilla-components';
 
-const themeProvider = (clientContext: any, parentTheme: Theme): any => {
+const themeProvider = (clientContext: any, parentTheme: Theme): Theme => {
   const theme = mergician(parentTheme, {
     brand: {
       primary: '#008348',
@@ -108,10 +107,10 @@ const themeProvider = (clientContext: any, parentTheme: Theme): any => {
       },
     },
     font: {
-      // family: 'Anton',
+      family: 'Anton',
     },
     isParent: false,
-  });
+  }) as Theme;
   return theme;
 };
 
