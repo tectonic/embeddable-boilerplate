@@ -1,19 +1,16 @@
-/* 
- * basic styling for TextInput
+/*
+ * This file is injected into every component's shadow DOM.
+ * Every theme property has an associated --embeddable variable.
+ * eg theme.controls.backgrounds.colors.normal becomes
+ * --embeddable-controls-backgrounds-colors-normal
  */
-.basic-text-input-component input[type='text'] {
-  width: 100%;
-  padding: 12px 200px;
-  margin: 8px 0;
-  box-sizing: border-box;
-}
 
-/* 
- * adds a border around any components that add `classNames: ['add-border']` to their `meta`
- */
-.embeddable-component,
-:host(.add-border) {
-  box-shadow: 0px 1px 4px rgba(28, 28, 33, 0.2);
-  border-radius: 16px;
-  padding: 20px !important;
+.example-component {
+  background-color: var(--embeddable-controls-backgrounds-colors-normal);
+  border-radius: var(--embeddable-controls-borders-radius);
+  border: 1px solid var(--embeddable-controls-borders-colors-normal);
+  display: relative;
+  height: 10px;
+  padding-right: 8px;
+  width: 100%;
 }

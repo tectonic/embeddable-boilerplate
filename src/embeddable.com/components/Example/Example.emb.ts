@@ -1,9 +1,10 @@
 /*
  * Welcome to Embeddable!
- * You're not limited to our Vanilla Components, when it comes to your dashboard.
+ * You're not limited to our Vanilla Components when it comes to your dashboard.
  * If you can build it in React, you can put it into Embeddable. The sky's the limit!
- * Here we've put together a simple example component showing the basics of construction.
- * Feel free to modify it, or copy it while creating your own components.
+ * Here we've put together a simple example component showing the basics of
+ * construction. Feel free to modify it, or copy it while creating your own
+ * components.
  *
  * Want to learn more? Visit https://docs.embeddable.com
  */

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTheme } from '@embeddable.com/react';
-import { Container, Theme } from 'vanilla-components';
+import { Container, Theme } from '@embeddable.com/vanilla-components';
 
 // These props come from the associated .emb.ts file
 type Props = {
@@ -10,29 +10,16 @@ type Props = {
   placeholder: string;
 };
 
-// The container component is a wrapper. It's not required but it includes things like the
-// Download as CVS/PNG menu. We recommend using it around any charts/graphs/tables.
+// The container component is a wrapper. It's not required but it includes things like
+// the Download as CVS/PNG menu. We recommend using it around any charts/graphs/tables.
 const ExampleComponent: React.FC<Props> = (props) => {
   // You can use the theme object to style your component
   const theme: Theme = useTheme() as Theme;
-  console.log('client theme', theme);
 
-  // NOTE: currently we're not getting theme values in custom components. This is a bug.
-  // Mikhail will fix it when he gets back from vacation.
+  // Note: all theme properties get an associated CSS variable (see index.css)
   return (
     <Container title={props.title}>
-      <div
-        className={`
-          bg-white 
-          border
-          h-10
-          pr-8
-          relative
-          rounded-xl
-          w-full
-          border-[${theme.controls.borders.colors.lightGray}]
-        `}
-      >
+      <div className="example-component">
         <span style={{ color: theme.brand.primary }}>Primary Brand Color!</span>
         <br />
         <span style={{ color: theme.brand.secondary }}>

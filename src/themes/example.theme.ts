@@ -1,4 +1,4 @@
-import { ThemePartial } from 'vanilla-components';
+import { ThemePartial } from '@embeddable.com/vanilla-components';
 
 /* This example theme only changes a handful of possible theme values. For a full list of
  * possible values, see the Theme and ThemePartial types in vanilla-components. */

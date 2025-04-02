@@ -1,6 +1,6 @@
 # Embeddable Boilerplate Repo
 
-Hello and welcome to the boilerplate repository for the Embeddable. If you haven't already gone through the [Onboarding Repo](https://github.com/embeddable-hq/onboarding), we **strongly recommend** doing so first. Seriously. It'll take three hours or less and you'll be so happy you did it. [Go now!](https://github.com/embeddable-hq/onboarding)
+Hello and welcome to the boilerplate repository for the Embeddable. If you haven't already familiarized yourself with [our documentation](https://docs.embeddable.com), we strongly recommend you do so first!
 
 ### Installation
 

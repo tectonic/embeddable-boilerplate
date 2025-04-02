@@ -23,13 +23,13 @@
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
-    "vanilla-components": "file:../vanilla-components"
+    "@embeddable.com/vanilla-components": "^0.0.6"
   },
   "devDependencies": {
-    "@embeddable.com/core": "^2.10.0-next.0",
-    "@embeddable.com/react": "^2.10.0-next.0",
-    "@embeddable.com/sdk-core": "^3.14.0-next.2",
-    "@embeddable.com/sdk-react": "^3.11.0-next.2",
+    "@embeddable.com/core": "^2.10.0",
+    "@embeddable.com/react": "^2.10.0",
+    "@embeddable.com/sdk-core": "^3.14.0",
+    "@embeddable.com/sdk-react": "^3.11.0",
     "cross-env": "^7.0.3"
   }
 }

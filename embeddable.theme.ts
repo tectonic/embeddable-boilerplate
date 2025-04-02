@@ -1,7 +1,20 @@
 import { mergician } from 'mergician';
-import { Theme } from 'vanilla-components';
+import { Theme } from '@embeddable.com/vanilla-components';
 
 const themeProvider = (clientContext: any, parentTheme: Theme): Theme => {
+  /*
+   * This allows for switching between the default and custom theme in the
+   * builder based on presets/client-contexts.cc.yml. You can remove this
+   * code if you don't want to do theme switching.
+   */
+  if (clientContext?.theme === 'default') {
+    return parentTheme;
+  }
+
+  /*
+   * This theme can be as simple or complex as you need it to be
+   * Full list of theme options can be found in the Theme interface
+   */
   const theme = mergician(parentTheme, {
     brand: {
       primary: '#008348',
@@ -9,107 +22,50 @@ const themeProvider = (clientContext: any, parentTheme: Theme): Theme => {
     },
     charts: {
       colors: [
-        '#c5fae2',
-        '#7ef2be',
-        '#2ce391',
-        '#00cc70',
-        '#009954',
-        '#008348',
-        '#006638',
-        '#004d2a',
+        '#c7522a',
+        '#e5c185',
+        '#f0daa5',
+        '#fbf2c4',
+        '#b8cdab',
+        '#74a892',
+        '#008585',
+        '#004343',
       ],
       /* Custom overrides for certain charts */
       bar: {
         borderRadius: 10,
         borderWidth: 0,
-        colors: ['#fe76bd', '#cca9fd', '#9faff9'],
-        font: {
-          size: 12,
-        },
-      },
-      bubble: {
-        colors: ['#fcdb6c', '#fcc270', '#f9976c', '#fd746e'],
-        font: {
-          size: 12,
-        },
-      },
-      kpi: {
-        alignment: 'left',
-        font: {
-          negativeColor: '#FF6B6C',
-          size: 32,
-        },
-      },
-      line: {
-        colors: ['#bcf879', '#d0e967', '#f5ef54'],
-        font: {
-          size: 12,
-        },
-        lineTension: 0.1,
-      },
-      pie: {
         colors: [
-          '#fe76bd',
-          '#cca9fd',
-          '#9faff9',
-          '#77cdf8',
-          '#79f0ef',
-          '#61f48c',
-          '#fcdb6c',
-          '#fcc270',
-          '#f9976c',
-          '#fd746e',
+          '#555d8e',
+          '#566f94',
+          '#56819b',
+          '#5494a1',
+          '#62a4a7',
+          '#7db2ac',
+          '#97c0b0',
+          '#b1ceb5',
         ],
         font: {
           size: 12,
         },
       },
+      pie: {
+        colors: [
+          '#ffa600',
+          '#ff8531',
+          '#ff6361',
+          '#de5a79',
+          '#bc5090',
+          '#8a508f',
+          '#58508d',
+          '#003f5c',
+        ],
+      },
       /* End custom chart overrides */
     },
-    controls: {
-      buttons: {
-        active: {
-          background: '#008348',
-          border: '#008348',
-          fontColor: '#FFFFFF',
-        },
-        hovered: {
-          background: '#FFFFFF',
-          border: '#008348',
-          fontColor: '#008348',
-        },
-        pressed: {
-          background: '#FFFFFF',
-          border: '#008348',
-          fontColor: '#008348',
-        },
-        fontSize: '12px',
-        height: '30px',
-        paddingY: '8px',
-        paddingX: '16px',
-        radius: '0px',
-      },
-      borders: {
-        colors: {
-          primary: '#0A0',
-        },
-        padding: '16px',
-        radius: '0px',
-      },
-      inputs: {
-        colors: {
-          hover: '#F3F4F6',
-          selected: '#F3F4F6',
-        },
-      },
-      tooltips: {
-        radius: '0px',
-      },
-    },
     font: {
-      family: 'Anton',
+      family: 'Noto Serif',
     },
-    isParent: false,
   }) as Theme;
   return theme;
 };
