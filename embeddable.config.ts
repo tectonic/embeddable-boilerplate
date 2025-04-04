@@ -5,7 +5,7 @@ export default defineConfig({
   componentLibraries: ['@embeddable.com/vanilla-components'],
   plugins: [react],
   // uncomment for EU deployments
-  // region: 'EU',
+  region: 'EU',
 
   // uncomment for US deployments
   // region: 'US',
