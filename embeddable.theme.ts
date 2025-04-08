@@ -1,4 +1,4 @@
-import { mergician } from 'mergician';
+import { defineTheme } from '@embeddable.com/core';
 import { Theme } from '@embeddable.com/vanilla-components';
 
 const themeProvider = (clientContext: any, parentTheme: Theme): Theme => {
@@ -15,7 +15,7 @@ const themeProvider = (clientContext: any, parentTheme: Theme): Theme => {
    * This theme can be as simple or complex as you need it to be
    * Full list of theme options can be found in the Theme interface
    */
-  const theme = mergician(parentTheme, {
+  const theme = defineTheme(parentTheme, {
     brand: {
       primary: '#008348',
       secondary: '#BA9653',

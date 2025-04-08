@@ -18,16 +18,15 @@
   },
   "dependencies": {
     "@stencil/core": "^4.23.0",
-    "mergician": "^2.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "@embeddable.com/vanilla-components": "^0.0.8"
   },
   "devDependencies": {
-    "@embeddable.com/core": "^2.10.0",
-    "@embeddable.com/react": "^2.10.0",
-    "@embeddable.com/sdk-core": "^3.14.0",
-    "@embeddable.com/sdk-react": "^3.11.0",
+    "@embeddable.com/core": "^2.10.1",
+    "@embeddable.com/react": "^2.10.1",
+    "@embeddable.com/sdk-core": "^3.14.1",
+    "@embeddable.com/sdk-react": "^3.11.1",
     "cross-env": "^7.0.3"
   }
 }

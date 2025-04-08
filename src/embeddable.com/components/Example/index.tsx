@@ -16,10 +16,9 @@ const ExampleComponent: React.FC<Props> = (props) => {
   // You can use the theme object to style your component
   const theme: Theme = useTheme() as Theme;
 
-  // Note: all theme properties get an associated CSS variable (see index.css)
   return (
     <Container title={props.title}>
-      <div className="example-component">
+      <div>
         <span style={{ color: theme.brand.primary }}>Primary Brand Color!</span>
         <br />
         <span style={{ color: theme.brand.secondary }}>
