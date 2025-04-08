@@ -4,8 +4,9 @@ import react from '@embeddable.com/sdk-react';
 export default defineConfig({
   componentLibraries: ['@embeddable.com/vanilla-components'],
   plugins: [react],
+
   // uncomment for EU deployments
-  region: 'legacy-US',
+  // region: 'EU',
 
   // uncomment for US deployments
   // region: 'US',
