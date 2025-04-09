@@ -17,10 +17,10 @@
     "embeddable:upgrade": "npx npm-check-updates -u \"/embeddable/\""
   },
   "dependencies": {
+    "@embeddable.com/vanilla-components": "^1.0.0",
     "@stencil/core": "^4.23.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "@embeddable.com/vanilla-components": "^0.0.8"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@embeddable.com/core": "^2.10.1",

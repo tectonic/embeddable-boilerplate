@@ -2,7 +2,6 @@ import { defineConfig } from '@embeddable.com/sdk-core';
 import react from '@embeddable.com/sdk-react';
 
 export default defineConfig({
-  componentLibraries: ['@embeddable.com/vanilla-components'],
   plugins: [react],
 
   // uncomment for EU deployments
@@ -10,6 +9,9 @@ export default defineConfig({
 
   // uncomment for US deployments
   // region: 'US',
+
+  /* Uncomment this line after you have finished the onboarding */
+  // componentLibraries: ['@embeddable.com/vanilla-components'],
 
   /* Note: if you wish to include only certain components from a library, you can specify
    * them like so:
