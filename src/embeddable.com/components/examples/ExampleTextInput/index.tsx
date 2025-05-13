@@ -5,7 +5,7 @@
  * You can delete this folder once you move to Vanilla Components post-Onboarding
  */
 import React, { useState } from 'react';
-import Container from '../Container';
+import { Container } from '@embeddable.com/vanilla-components';
 import { inputStyles, labelStyles, labelTopStyles } from './styles';
 
 type Change = (text: string) => void;

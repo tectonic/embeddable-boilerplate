@@ -19,7 +19,7 @@ import {
 import { Pie } from 'react-chartjs-2';
 import { Dimension, Measure, Dataset } from '@embeddable.com/core';
 import { DataResponse } from '@embeddable.com/core';
-import Container from '../Container';
+import { Container } from '@embeddable.com/vanilla-components';
 
 ChartJS.register(
   CategoryScale,
