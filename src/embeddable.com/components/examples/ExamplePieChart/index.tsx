@@ -81,7 +81,6 @@ type Props = {
 };
 
 export default (props: Props) => {
-  console.log('BasicPieComponent.props', props);
   const { slice, metric, showLegend, results } = props;
   const { isLoading, data, error } = results;
 
