@@ -19,7 +19,7 @@ import {
 import { Pie } from 'react-chartjs-2';
 import { Dimension, Measure, Dataset } from '@embeddable.com/core';
 import { DataResponse } from '@embeddable.com/core';
-import Container from '../Container';
+import { Container } from '@embeddable.com/vanilla-components';
 
 ChartJS.register(
   CategoryScale,
@@ -81,7 +81,6 @@ type Props = {
 };
 
 export default (props: Props) => {
-  console.log('BasicPieComponent.props', props);
   const { slice, metric, showLegend, results } = props;
   const { isLoading, data, error } = results;
 
