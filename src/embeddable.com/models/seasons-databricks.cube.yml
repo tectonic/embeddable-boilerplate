@@ -1,0 +1,35 @@
+cubes:
+  - name: seasons
+    title: "Seasons (Databricks)"
+    data_source: databricks
+    sql: >
+      SELECT
+        Dashboards.seasons.id,
+        Dashboards.seasons.slug,
+        Dashboards.seasons.account_id,
+        Dashboards.seasons.deleted_at,
+        Dashboards.translations.value AS name
+      FROM Dashboards.seasons
+        LEFT JOIN Dashboards.translations
+          ON Dashboards.seasons.id = Dashboards.translations.foreign_id
+            AND Dashboards.translations.resource = 'Season'
+            AND Dashboards.translations.language = '{ COMPILE_CONTEXT.securityContext.language }'
+            AND Dashboards.translations.field = 'name'
+      WHERE Dashboards.seasons.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+        AND Dashboards.seasons.deleted_at IS NULL
+
+    dimensions:
+      - name: id
+        sql: id
+        type: number
+        primary_key: true
+
+      - name: name
+        title: 'Season'
+        sql: name
+        type: string
+
+      - name: slug
+        title: 'Slug'
+        sql: slug
+        type: string

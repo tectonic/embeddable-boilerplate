@@ -1,0 +1,42 @@
+cubes:
+  - name: categories_mysql
+    title: "Categories (MySQL)"
+    data_source: mysql
+    sql: >
+      SELECT
+        categories.id,
+        categories.slug,
+        categories.season_id,
+        categories.form_id,
+        categories.account_id,
+        categories.deleted_at,
+        translations.value AS name
+      FROM categories
+        LEFT JOIN translations
+          ON categories.id = translations.foreign_id
+            AND translations.resource = 'Category'
+            AND translations.language = '{ COMPILE_CONTEXT.securityContext.language }'
+            AND translations.field = 'name'
+      WHERE categories.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+        AND categories.deleted_at IS NULL
+
+    joins:
+      - name: seasons_mysql
+        sql: "{CUBE}.season_id = {seasons_mysql}.id"
+        relationship: many_to_one
+
+      - name: forms_mysql
+        sql: "{CUBE}.form_id = {forms_mysql}.id"
+        relationship: many_to_one
+
+    dimensions:
+      - name: id
+        sql: id
+        type: number
+        primary_key: true
+
+      - name: name
+        title: 'Category'
+        sql: name
+        type: string
+
