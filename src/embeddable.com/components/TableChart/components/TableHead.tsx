@@ -38,7 +38,7 @@ const TableHead = ({ columns, sortBy, sortDirection, onSortingChange, minColumnW
                 onClick={() => onSortingChange?.(column, newSortDirection)}
               >
                 <div className="flex items-center gap-1 hover:text-black">
-                  <span className="text-[#333942] mr-1 truncate">
+                  <span className="text-[#424242] mr-1 truncate">
                     {column.title}
                   </span>
 

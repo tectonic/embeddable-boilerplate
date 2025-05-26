@@ -27,6 +27,9 @@
     "@embeddable.com/react": "^2.10.1",
     "@embeddable.com/sdk-core": "^3.14.1",
     "@embeddable.com/sdk-react": "^3.11.1",
-    "cross-env": "^7.0.3"
+    "autoprefixer": "^10.4.21",
+    "cross-env": "^7.0.3",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.17"
   }
 }
