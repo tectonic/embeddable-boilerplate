@@ -104,7 +104,7 @@ const PivotTable = <T,>({
   }, [measures]);
 
   return (
-    <table className="min-w-full border-separate border-spacing-0 table-fixed">
+    <table className="min-w-full border-separate border-spacing-0 table-fixed pr-[10px]">
       <thead className="text-[#333942] sticky top-0 z-20 bg-white">
         <TableHead
           columns={columns}

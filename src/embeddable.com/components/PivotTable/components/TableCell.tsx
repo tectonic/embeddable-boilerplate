@@ -11,7 +11,7 @@ export default function TableCell({ isHeader, className, children }: PropsWithCh
 
   return (
     <Cell
-      className={cn('px-2 py-1.5 font-normal first:border-l bg-inherit', {
+      className={cn('p-[15px] font-normal bg-inherit', {
         'lg:z-10 lg:sticky lg:left-0 text-left': isHeader,
       }, className)}
     >

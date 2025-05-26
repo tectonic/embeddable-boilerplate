@@ -40,9 +40,9 @@ export default function TableHead({
       <th
         key={`${columnIndex}-${column.key}`}
         colSpan={leafColumns.length}
-        className={cn('p-2 border-y first:border-l', {
+        className={cn('p-[15px] border-b-2 border-[#dddddd]', {
           'border-b-0': column.children?.length,
-          'border-r': shouldRenderRightBorder,
+          // 'border-r': shouldRenderRightBorder,
           'lg:sticky lg:left-0 lg:z-10 bg-white': isSticky,
           'cursor-pointer': isSortable,
         })}
