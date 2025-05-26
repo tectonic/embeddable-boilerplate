@@ -5,13 +5,16 @@ export default defineConfig({
   plugins: [react],
 
   // uncomment for EU deployments
-  // region: 'EU',
+  region: 'EU',
 
   // uncomment for US deployments
   // region: 'US',
 
   /* Uncomment this line after you have finished the onboarding */
-  // componentLibraries: ['@embeddable.com/vanilla-components'],
+  componentLibraries: [{
+    name: '@embeddable.com/vanilla-components',
+    exclude: ['TableChart', 'PivotTable'],
+  }],
 
   /* Note: if you wish to include only certain components from a library, you can specify
    * them like so:
