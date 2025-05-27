@@ -90,10 +90,10 @@ export default (props: Props) => {
       className="overflow-y-auto"
       childContainerClassName="overflow-x-auto"
     >
-      <div style={{ minWidth: `${columns.length * (props.minColumnWidth ?? 100)}px` }}>
+      <div style={{ minWidth: `${columns.length * (props.minColumnWidth ?? 100)}px` }} className="pr-[10px]">
         {!!meta && !(props.results?.isLoading && !props.results?.data?.length) && (
           <table
-            className="overflow-visible w-full"
+            className="overflow-visible w-full mb-[20px]"
             style={{ fontSize: props.fontSize ? `${props.fontSize}px` : REGULAR_FONT_SIZE }}
           >
             <TableHead
@@ -110,11 +110,11 @@ export default (props: Props) => {
 
             <tbody>
               {results?.data?.slice(0, maxRowsFit).map((row, index) => (
-                <tr key={index} className="hover:bg-gray-400/5">
+                <tr key={index}>
                   {columns.map((column, index) => (
                     <td
                       key={index}
-                      className="text-dark p-3 truncate"
+                      className="text-dark p-[15px] pb-[26px] truncate border-b border-[#dddddd]"
                       style={{
                         fontSize: props.fontSize ? `${props.fontSize}px` : REGULAR_FONT_SIZE,
                         maxWidth: props.minColumnWidth ? `${props.minColumnWidth * 1.2}px` : 'auto',
