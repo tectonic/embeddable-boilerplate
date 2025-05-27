@@ -10,12 +10,12 @@ type Props = {
 };
 
 const Pagination = ({ currentPage, hasNextPage, onPageChange }: Props) => (
-  <div className="flex items-center justify-center text-[12px] font-bold text-[#333942] select-none sticky left-0">
+  <div className="flex items-center -space-x-px justify-end text-[12px] my-[20px] px-[10px] font-bold text-[#333942] select-none sticky left-0">
     <ChevronLeft
       className={cn(
-        'cursor-pointer hover:bg-black/10 rounded-full w-8 h-8 p-1 border border-[#DADCE1] flex items-center justify-center',
+        'cursor-pointer hover:bg-black/10 w-9 h-10 py-[11px] flex items-center justify-center border border-[#6f6f6f] rounded-s-md',
         {
-          'opacity-50 pointer-events-none': currentPage === 0,
+          'bg-dark pointer-events-none': currentPage === 0,
         },
       )}
       onClick={() => {
@@ -23,10 +23,10 @@ const Pagination = ({ currentPage, hasNextPage, onPageChange }: Props) => (
       }}
     />
 
-    <span className="mx-4">Page {currentPage + 1}</span>
+    <span className="px-[14px] py-[9px] border border-[#6f6f6f] text-[14px]">{currentPage + 1}</span>
 
     <ChevronRight
-      className={`cursor-pointer hover:bg-black/10 rounded-full w-8 h-8 p-1 border border-[#DADCE1] flex items-center justify-center ${hasNextPage ? 'opacity-50 pointer-events-none' : ''
+      className={`cursor-pointer hover:bg-black/10 w-9 h-10 py-[11px] flex items-center justify-center border border-[#6f6f6f] rounded-e-md ${hasNextPage ? 'bg-dark pointer-events-none' : ''
         }`}
       onClick={() => {
         onPageChange?.(currentPage + 1);
