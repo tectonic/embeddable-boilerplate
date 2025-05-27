@@ -60,7 +60,7 @@ export default function TableHead({
         )}
       >
         <div
-          className={cn('text-center', {
+          className={cn('text-center font-[--embeddable-charts-fontWeights-title]', {
             'text-left': shouldBeLeftAligned,
             'flex justify-between items-center gap-2': isSortable
           })}
