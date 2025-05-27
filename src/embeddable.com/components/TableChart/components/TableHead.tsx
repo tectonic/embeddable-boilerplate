@@ -13,7 +13,7 @@ type Props = {
 
 const TableHead = ({ columns, sortBy, sortDirection, onSortingChange, minColumnWidth }: Props) => {
   return (
-    <thead className="border-y border-[#B8BDC6]">
+    <thead className="border-b-2 border-[#dddddd]">
       <tr>
         {
           columns.map((column) => {
@@ -27,7 +27,7 @@ const TableHead = ({ columns, sortBy, sortDirection, onSortingChange, minColumnW
             return (
               <th
                 key={column.name}
-                className="bg-white select-none cursor-pointer p-3"
+                className="hover:bg-white select-none cursor-pointer p-[15px]"
                 style={minColumnWidth
                   ? {
                     minWidth: `${minColumnWidth}px`,
@@ -38,7 +38,7 @@ const TableHead = ({ columns, sortBy, sortDirection, onSortingChange, minColumnW
                 onClick={() => onSortingChange?.(column, newSortDirection)}
               >
                 <div className="flex items-center gap-1 hover:text-black">
-                  <span className="text-[#424242] mr-1 truncate">
+                  <span className="text-[#333942] mr-1 truncate">
                     {column.title}
                   </span>
 
