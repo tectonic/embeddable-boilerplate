@@ -28,8 +28,8 @@ const TableRow = ({ columns, row, renderCell, level = 0, isRowGroupDefaultExpand
       <TableCell
         key={`${row.id}-${column.key}`}
         isHeader={isRowHeader}
-        className={cn('border-b', {
-          'border-r': !column.parent || column.parent?.children?.at(-1)?.key === column.key || isRowHeader,
+        className={cn('border-b border-[#dddddd]', {
+          // 'border-r': !column.parent || column.parent?.children?.at(-1)?.key === column.key || isRowHeader,
         })}
       >
         <div
