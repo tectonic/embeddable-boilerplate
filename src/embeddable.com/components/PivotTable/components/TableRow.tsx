@@ -63,7 +63,7 @@ const TableRow = ({ columns, row, renderCell, level = 0, isRowGroupDefaultExpand
 
   return (
     <>
-      <tr className="bg-white hover:bg-gray-100">
+      <tr>
         {renderColumns(columns, row.data)}
       </tr>
       {
