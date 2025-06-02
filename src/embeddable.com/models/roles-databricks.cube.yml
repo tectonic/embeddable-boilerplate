@@ -1,0 +1,30 @@
+cubes:
+  - name: roles
+    title: "Roles (Databricks)"
+    data_source: databricks
+    sql: >
+      SELECT
+        Dashboards.roles.id,
+        Dashboards.roles.slug,
+        Dashboards.roles.account_id,
+        Dashboards.roles.deleted_at,
+        Dashboards.translations.value AS name
+      FROM Dashboards.roles
+        LEFT JOIN Dashboards.translations
+          ON Dashboards.roles.id = Dashboards.translations.foreign_id
+            AND Dashboards.translations.resource = 'Role'
+            AND Dashboards.translations.language = '{ COMPILE_CONTEXT.securityContext.language }'
+            AND Dashboards.translations.field = 'name'
+      WHERE Dashboards.roles.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+        AND Dashboards.roles.deleted_at IS NULL
+
+    dimensions:
+      - name: id
+        sql: id
+        type: number
+        primary_key: true
+
+      - name: name
+        sql: name
+        type: string
+
