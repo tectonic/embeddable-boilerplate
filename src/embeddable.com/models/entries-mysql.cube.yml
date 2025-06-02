@@ -13,6 +13,7 @@ cubes:
         entries.deleted_at,
         entries.submitted_at,
         entries.created_at,
+        entries.grant_status_id,
         categories.season_id AS category_season_id,
         categories.form_id AS category_form_id,
         chapters.season_id AS chapter_season_id
@@ -50,6 +51,10 @@ cubes:
 
       - name: chapters_mysql
         sql: "{CUBE}.chapter_id = {chapters_mysql}.id"
+        relationship: many_to_one
+
+      - name: grant_statuses_mysql
+        sql: "{CUBE}.grant_status_id = {grant_statuses_mysql}.id"
         relationship: many_to_one
 
     dimensions:
