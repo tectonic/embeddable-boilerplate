@@ -1,0 +1,41 @@
+cubes:
+  - name: chapters
+    title: "Chapters (Databricks)"
+    data_source: databricks
+    sql: >
+      SELECT
+        Dashboards.chapters.id,
+        Dashboards.chapters.slug,
+        Dashboards.chapters.season_id,
+        Dashboards.chapters.account_id,
+        Dashboards.chapters.deleted_at,
+        Dashboards.translations.value AS name
+      FROM Dashboards.chapters
+        LEFT JOIN Dashboards.translations
+          ON Dashboards.chapters.id = Dashboards.translations.foreign_id
+            AND Dashboards.translations.resource = 'Chapter'
+            AND Dashboards.translations.language = '{ COMPILE_CONTEXT.securityContext.language }'
+            AND Dashboards.translations.field = 'name'
+      WHERE Dashboards.chapters.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+        AND Dashboards.chapters.deleted_at IS NULL
+
+    joins:
+      - name: seasons
+        sql: "{CUBE}.season_id = {seasons}.id"
+        relationship: many_to_one
+
+    dimensions:
+      - name: id
+        sql: id
+        type: number
+        primary_key: true
+
+      - name: name
+        title: 'Chapter'
+        sql: name
+        type: string
+
+      - name: slug
+        title: 'Slug'
+        sql: slug
+        type: string

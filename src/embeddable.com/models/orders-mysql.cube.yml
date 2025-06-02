@@ -1,0 +1,37 @@
+cubes:
+  - name: orders_mysql
+    title: "Orders (MySQL)"
+    data_source: mysql
+    sql: >
+      SELECT
+        orders.id,
+        orders.season_id,
+        orders.currency_code,
+        orders.total,
+        orders.account_id,
+        orders.deleted_at,
+      FROM orders
+      WHERE orders.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+        AND orders.deleted_at IS NULL
+
+    joins:
+      - name: seasons_mysql
+        sql: "{CUBE}.season_id = {seasons_mysql}.id"
+        relationship: many_to_one
+    
+    dimensions:
+      - name: id
+        sql: id
+        type: number
+        primary_key: true
+
+      - name: currency_code
+        sql: currency_code
+        type: string
+
+    measures:
+      - name: sum_total
+        sql: total
+        type: sum
+        title: 'Total amount'
+        format: currency

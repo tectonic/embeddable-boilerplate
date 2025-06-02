@@ -1,0 +1,37 @@
+cubes:
+  - name: orders
+    title: "Orders (Databricks)"
+    data_source: databricks
+    sql: >
+      SELECT
+        Dashboards.orders.id,
+        Dashboards.orders.season_id,
+        Dashboards.orders.currency_code,
+        Dashboards.orders.total,
+        Dashboards.orders.account_id,
+        Dashboards.orders.deleted_at,
+      FROM Dashboards.orders
+      WHERE Dashboards.orders.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+        AND Dashboards.orders.deleted_at IS NULL
+
+    joins:
+      - name: seasons
+        sql: "{CUBE}.season_id = {seasons}.id"
+        relationship: many_to_one
+    
+    dimensions:
+      - name: id
+        sql: id
+        type: number
+        primary_key: true
+
+      - name: currency_code
+        sql: currency_code
+        type: string
+
+    measures:
+      - name: sum_total
+        sql: total
+        type: sum
+        title: 'Total amount'
+        format: currency

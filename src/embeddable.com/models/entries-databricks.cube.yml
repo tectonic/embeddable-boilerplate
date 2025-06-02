@@ -1,0 +1,91 @@
+cubes:
+  - name: entries
+    title: "Entries (Databricks)"
+    data_source: databricks
+    sql: >
+      SELECT
+        Dashboards.entries.id,
+        Dashboards.entries.category_id,
+        Dashboards.entries.chapter_id,
+        Dashboards.entries.season_id,
+        Dashboards.entries.form_id,
+        Dashboards.entries.account_id,
+        Dashboards.entries.deleted_at,
+        Dashboards.entries.submitted_at,
+        Dashboards.entries.created_at,
+        Dashboards.categories.season_id AS category_season_id,
+        Dashboards.categories.form_id AS category_form_id,
+        Dashboards.chapters.season_id AS chapter_season_id
+      FROM Dashboards.entries
+        INNER JOIN Dashboards.categories
+          ON Dashboards.entries.category_id = Dashboards.categories.id
+            AND Dashboards.categories.rgt - Dashboards.categories.lft = 1
+            AND Dashboards.categories.deleted_at IS NULL
+            AND Dashboards.categories.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+        INNER JOIN Dashboards.chapters
+          ON Dashboards.entries.chapter_id = Dashboards.chapters.id
+            AND Dashboards.chapters.deleted_at IS NULL
+            AND Dashboards.chapters.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+        INNER JOIN Dashboards.forms
+          ON Dashboards.entries.form_id = Dashboards.forms.id
+            AND Dashboards.forms.deleted_at IS NULL
+            AND Dashboards.forms.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+      WHERE Dashboards.entries.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+        AND Dashboards.entries.deleted_at is null
+
+    joins:
+      - name: seasons
+        # It's necessary to also filter by category_season_id and chapter_season_id because sometimes the season of these tables become out of sync with the entries that belong to them
+        sql: "{CUBE}.season_id = {seasons}.id AND {CUBE}.category_season_id = {seasons}.id AND {CUBE}.chapter_season_id = {seasons}.id"
+        relationship: many_to_one
+
+      - name: forms
+        # It's necessary to also filter by category_form_id because sometimes the form of these tables become out of sync with the entries that belong to them
+        sql: "{CUBE}.form_id = {forms}.id AND {CUBE}.category_form_id = {forms}.id"
+        relationship: many_to_one
+
+      - name: categories
+        sql: "{CUBE}.category_id = {categories}.id"
+        relationship: many_to_one
+
+      - name: chapters
+        sql: "{CUBE}.chapter_id = {chapters}.id"
+        relationship: many_to_one
+
+    dimensions:
+      - name: id
+        sql: id
+        type: number
+        primary_key: true
+
+      - name: completion_status
+        type: string
+        case:
+          when:
+            - sql: submitted_at IS NOT NULL
+              label: Submitted
+          else:
+            label: In-Progress
+
+      - name: created_at
+        sql: 'TO_TIMESTAMP(entries.created_at, "yyyy-MM-dd HH:mm:ss")'
+        type: time
+
+      - name: submitted_at
+        sql: 'TO_TIMESTAMP(entries.submitted_at, "yyyy-MM-dd HH:mm:ss")'
+        type: time
+
+    measures:
+      - name: count
+        type: count
+        title: '# of entries'
+
+      - name: count_submitted
+        sql: entries.submitted_at
+        type: count
+        title: '# of submitted entries'
+
+      - name: count_in_progress
+        sql: CASE WHEN entries.submitted_at IS NULL THEN 1 END
+        type: count
+        title: '# of in-progress entries'

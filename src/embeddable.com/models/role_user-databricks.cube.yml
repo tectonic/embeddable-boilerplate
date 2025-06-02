@@ -1,0 +1,46 @@
+cubes:
+  - name: role_user
+    title: "Role User (Databricks)"
+    data_source: databricks
+    sql: >
+      SELECT
+        Dashboards.role_user.id,
+        Dashboards.role_user.role_id,
+        Dashboards.role_user.user_id,
+      FROM Dashboards.role_user
+        INNER JOIN Dashboards.memberships
+          ON Dashboards.memberships.user_id = Dashboards.role_user.user_id
+            AND Dashboards.memberships.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+            AND Dashboards.memberships.deleted_at IS NULL
+        INNER JOIN Dashboards.roles
+          ON Dashboards.roles.id = Dashboards.role_user.role_id
+            AND Dashboards.roles.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+            AND Dashboards.roles.deleted_at IS NULL
+
+    joins:
+      - name: roles
+        sql: "{CUBE}.role_id = {roles}.id"
+        relationship: many_to_one
+
+      - name: users
+        sql: "{CUBE}.user_id = {users}.id"
+        relationship: many_to_one
+
+    dimensions:
+      - name: id
+        sql: id
+        type: number
+        primary_key: true
+
+      - name: role_id
+        sql: role_id
+        type: number
+
+      - name: user_id
+        sql: user_id
+        type: number
+
+    measures:
+      - name: count
+        type: count
+        title: '# of users'

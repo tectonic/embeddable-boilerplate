@@ -1,0 +1,35 @@
+cubes:
+  - name: seasons_mysql
+    title: "Seasons (MySQL)"
+    data_source: mysql
+    sql: >
+      SELECT
+        seasons.id,
+        seasons.slug,
+        seasons.account_id,
+        seasons.deleted_at,
+        translations.value AS name
+      FROM seasons
+        LEFT JOIN translations
+          ON seasons.id = translations.foreign_id
+            AND translations.resource = 'Season'
+            AND translations.language = '{ COMPILE_CONTEXT.securityContext.language }'
+            AND translations.field = 'name'
+      WHERE seasons.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+        AND seasons.deleted_at IS NULL
+
+    dimensions:
+      - name: id
+        sql: id
+        type: number
+        primary_key: true
+
+      - name: name
+        title: 'Season'
+        sql: name
+        type: string
+
+      - name: slug
+        title: 'Slug'
+        sql: slug
+        type: string

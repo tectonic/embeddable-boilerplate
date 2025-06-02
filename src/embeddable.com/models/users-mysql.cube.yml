@@ -1,0 +1,48 @@
+cubes:
+  - name: users_mysql
+    title: "Users (MySQL)"
+    data_source: mysql
+    sql: >
+      SELECT
+        users.id,
+        users.created_at,
+        users.confirmed_at,
+        users.deleted_at,
+        memberships.account_id
+      FROM users
+        INNER JOIN memberships
+          ON memberships.user_id = users.id
+            AND memberships.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+            AND memberships.deleted_at IS NULL
+
+    dimensions:
+      - name: id
+        sql: id
+        type: number
+        primary_key: true
+
+      - name: created_period
+        type: string
+        case:
+          when:
+            - sql: 'DATEDIFF(HOUR, created_at, CURRENT_TIMESTAMP()) <= 24'
+              label: '24 hours'
+            - sql: 'DATEDIFF(DAY, created_at, CURRENT_TIMESTAMP()) <= 7'
+              label: '7 days'
+            - sql: 'DATEDIFF(DAY, created_at, CURRENT_TIMESTAMP()) <= 30'
+              label: '30 days'
+          else:
+            label: '30+ days'
+
+      - name: created_at
+        sql: created_at
+        type: time
+
+      - name: confirmed_at
+        sql: confirmed_at
+        type: time
+
+    measures:
+      - name: count
+        type: count
+        title: '# of users'

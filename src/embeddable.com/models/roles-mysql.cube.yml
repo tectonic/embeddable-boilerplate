@@ -1,0 +1,30 @@
+cubes:
+  - name: roles_mysql
+    title: "Roles (MySQL)"
+    data_source: mysql
+    sql: >
+      SELECT
+        roles.id,
+        roles.slug,
+        roles.account_id,
+        roles.deleted_at,
+        translations.value AS name
+      FROM roles
+        LEFT JOIN translations
+          ON roles.id = translations.foreign_id
+            AND translations.resource = 'Role'
+            AND translations.language = '{ COMPILE_CONTEXT.securityContext.language }'
+            AND translations.field = 'name'
+      WHERE roles.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+        AND roles.deleted_at IS NULL
+
+    dimensions:
+      - name: id
+        sql: id
+        type: number
+        primary_key: true
+
+      - name: name
+        sql: name
+        type: string
+
