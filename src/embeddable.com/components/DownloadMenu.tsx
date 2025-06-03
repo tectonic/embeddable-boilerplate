@@ -146,22 +146,22 @@ const DownloadMenu: React.FC<Props> = (props) => {
           )}
           {showMenu && (
             <>
-              <div className="absolute bg-white flex items-center right-0 p-4 rounded shadow-md top-6 w-40 whitespace-nowrap">
-                <ul>
-                  <li className="mb-2">
+              <div className="absolute border border-1 border-[#106779] bg-white flex items-center right-0 rounded shadow-md top-6 w-40 whitespace-nowrap">
+                <ul className="w-full">
+                  <li className="hover:bg-[#106779] px-[10px] py-[7px] w-full hover:text-white">
                     <a
                       href="#"
                       onClick={handleCSVClick}
-                      className="inline-block flex items-center hover:opacity-100 opacity-60"
+                      className="inline-block flex items-center"
                     >
-                      <IconDownloadCSV className="cursor-pointer inline-block mr-2" /> Download CSV
+                      <IconDownloadCSV className="cursor-pointer inline-block mr-2 hover:fill-white" /> Download CSV
                     </a>
                   </li>
-                  <li>
+                  <li className="hover:bg-[#106779] px-[10px] py-[7px] w-full hover:text-white">
                     <a
                       href="#"
                       onClick={handlePNGClick}
-                      className="inline-block flex items-center hover:opacity-100 opacity-60"
+                      className="inline-block flex items-center"
                     >
                       <IconDownloadPNG className="cursor-pointer inline-block mr-2" /> Download PNG
                     </a>
@@ -173,7 +173,7 @@ const DownloadMenu: React.FC<Props> = (props) => {
                 ref={refFocus}
                 onBlur={() =>
                   setTimeout(() => {
-                    setShowMenu(false);
+                    setShowMenu(true);
                   }, 200)
                 }
                 style={{ width: 1, height: 1, opacity: 0 }}
