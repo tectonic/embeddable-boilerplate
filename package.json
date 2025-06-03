@@ -17,16 +17,18 @@
     "embeddable:upgrade": "npx npm-check-updates -u \"/embeddable/\""
   },
   "dependencies": {
-    "@embeddable.com/vanilla-components": "^1.0.0",
+    "@embeddable.com/vanilla-components": "^1.0.7",
     "@stencil/core": "^4.23.0",
+    "chart.js": "^4.4.9",
     "react": "^18.2.0",
+    "react-chartjs-2": "^5.3.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@embeddable.com/core": "^2.10.1",
-    "@embeddable.com/react": "^2.10.1",
-    "@embeddable.com/sdk-core": "^3.14.1",
-    "@embeddable.com/sdk-react": "^3.11.1",
+    "@embeddable.com/core": "^2.10.3",
+    "@embeddable.com/react": "^2.10.3",
+    "@embeddable.com/sdk-core": "^3.14.3",
+    "@embeddable.com/sdk-react": "^3.11.3",
     "cross-env": "^7.0.3"
   }
 }
