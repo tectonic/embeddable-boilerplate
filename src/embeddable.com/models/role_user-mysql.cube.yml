@@ -1,0 +1,46 @@
+cubes:
+  - name: role_user_mysql
+    title: "Role User (MySQL)"
+    data_source: mysql
+    sql: >
+      SELECT
+        role_user.id,
+        role_user.role_id,
+        role_user.user_id
+      FROM role_user
+        INNER JOIN memberships
+          ON memberships.user_id = role_user.user_id
+            AND memberships.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+            AND memberships.deleted_at IS NULL
+        INNER JOIN roles
+          ON roles.id = role_user.role_id
+            AND roles.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+            AND roles.deleted_at IS NULL
+
+    joins:
+      - name: roles_mysql
+        sql: "{CUBE}.role_id = {roles_mysql}.id"
+        relationship: many_to_one
+
+      - name: users_mysql
+        sql: "{CUBE}.user_id = {users_mysql}.id"
+        relationship: many_to_one
+
+    dimensions:
+      - name: id
+        sql: id
+        type: number
+        primary_key: true
+
+      - name: role_id
+        sql: role_id
+        type: number
+
+      - name: user_id
+        sql: user_id
+        type: number
+
+    measures:
+      - name: count
+        type: count
+        title: '# of users'

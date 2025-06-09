@@ -1,0 +1,41 @@
+cubes:
+  - name: forms
+    title: "Forms (Databricks)"
+    data_source: databricks
+    sql: >
+      SELECT
+        Dashboards.forms.id,
+        Dashboards.forms.slug,
+        Dashboards.forms.season_id,
+        Dashboards.forms.account_id,
+        Dashboards.forms.deleted_at,
+        Dashboards.translations.value AS name
+      FROM Dashboards.forms
+        LEFT JOIN Dashboards.translations
+          ON Dashboards.forms.id = Dashboards.translations.foreign_id
+            AND Dashboards.translations.resource = 'Form'
+            AND Dashboards.translations.language = '{ COMPILE_CONTEXT.securityContext.language }'
+            AND Dashboards.translations.field = 'name'
+      WHERE Dashboards.forms.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+        AND Dashboards.forms.deleted_at IS NULL
+
+    joins:
+      - name: seasons # the name of the data model to join to (i.e. not the table)
+        sql: "{CUBE}.season_id = {seasons}.id"
+        relationship: many_to_one
+
+    dimensions:
+      - name: id
+        sql: id
+        type: number
+        primary_key: true
+
+      - name: name
+        title: 'Form'
+        sql: name
+        type: string
+
+      - name: slug
+        title: 'Slug'
+        sql: slug
+        type: string

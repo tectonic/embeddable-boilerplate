@@ -1,0 +1,91 @@
+cubes:
+  - name: entries_mysql
+    title: "Entries (MySQL)"
+    data_source: mysql
+    sql: >
+      SELECT
+        entries.id,
+        entries.category_id,
+        entries.chapter_id,
+        entries.season_id,
+        entries.form_id,
+        entries.account_id,
+        entries.deleted_at,
+        entries.submitted_at,
+        entries.created_at,
+        categories.season_id AS category_season_id,
+        categories.form_id AS category_form_id,
+        chapters.season_id AS chapter_season_id
+      FROM entries
+        INNER JOIN categories
+          ON entries.category_id = categories.id
+            AND categories.rgt - categories.lft = 1
+            AND categories.deleted_at IS NULL
+            AND categories.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+        INNER JOIN chapters
+          ON entries.chapter_id = chapters.id
+            AND chapters.deleted_at IS NULL
+            AND chapters.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+        INNER JOIN forms
+          ON entries.form_id = forms.id
+            AND forms.deleted_at IS NULL
+            AND forms.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+      WHERE entries.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+        AND entries.deleted_at is null
+
+    joins:
+      - name: seasons_mysql
+        # It's necessary to also filter by category_season_id and chapter_season_id because sometimes the season of these tables become out of sync with the entries that belong to them
+        sql: "{CUBE}.season_id = {seasons_mysql}.id AND {CUBE}.category_season_id = {seasons_mysql}.id AND {CUBE}.chapter_season_id = {seasons_mysql}.id"
+        relationship: many_to_one
+
+      - name: forms_mysql
+        # It's necessary to also filter by category_form_id because sometimes the form of these tables become out of sync with the entries that belong to them
+        sql: "{CUBE}.form_id = {forms_mysql}.id AND {CUBE}.category_form_id = {forms_mysql}.id"
+        relationship: many_to_one
+
+      - name: categories_mysql
+        sql: "{CUBE}.category_id = {categories_mysql}.id"
+        relationship: many_to_one
+
+      - name: chapters_mysql
+        sql: "{CUBE}.chapter_id = {chapters_mysql}.id"
+        relationship: many_to_one
+
+    dimensions:
+      - name: id
+        sql: id
+        type: number
+        primary_key: true
+
+      - name: completion_status
+        type: string
+        case:
+          when:
+            - sql: submitted_at IS NOT NULL
+              label: Submitted
+          else:
+            label: In-Progress
+
+      - name: created_at
+        sql: created_at
+        type: time
+
+      - name: submitted_at
+        sql: submitted_at
+        type: time
+
+    measures:
+      - name: count
+        type: count
+        title: '# of entries'
+
+      - name: count_submitted
+        sql: submitted_at
+        type: count
+        title: '# of submitted entries'
+
+      - name: count_in_progress
+        sql: CASE WHEN submitted_at IS NULL THEN 1 END
+        type: count
+        title: '# of in-progress entries'

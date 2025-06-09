@@ -1,0 +1,41 @@
+cubes:
+  - name: forms_mysql
+    title: "Forms (MySQL)"
+    data_source: mysql
+    sql: >
+      SELECT
+        forms.id,
+        forms.slug,
+        forms.season_id,
+        forms.account_id,
+        forms.deleted_at,
+        translations.value AS name
+      FROM forms
+        LEFT JOIN translations
+          ON forms.id = translations.foreign_id
+            AND translations.resource = 'Form'
+            AND translations.language = '{ COMPILE_CONTEXT.securityContext.language }'
+            AND translations.field = 'name'
+      WHERE forms.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+        AND forms.deleted_at IS NULL
+
+    joins:
+      - name: seasons_mysql # the name of the data model to join to (i.e. not the table)
+        sql: "{CUBE}.season_id = {seasons_mysql}.id"
+        relationship: many_to_one
+
+    dimensions:
+      - name: id
+        sql: id
+        type: number
+        primary_key: true
+
+      - name: name
+        title: 'Form'
+        sql: name
+        type: string
+
+      - name: slug
+        title: 'Slug'
+        sql: slug
+        type: string
