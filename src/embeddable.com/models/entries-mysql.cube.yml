@@ -83,30 +83,6 @@ cubes:
         sql: submitted_at
         type: time
 
-      - name: archived_at
-        sql: archived_at
-        type: time
-
-      - name: resubmitted_at
-        sql: resubmitted_at
-        type: time
-
-      - name: resubmission_required_at
-        sql: resubmission_required_at
-        type: time
-
-      - name: Archived
-        type: boolean
-        sql: archived_at IS NOT NULL
-
-      - name: Resubmitted
-        type: boolean
-        sql: resubmitted_at IS NOT NULL
-
-      - name: Resubmission Required
-        type: boolean
-        sql: resubmission_required_at IS NOT NULL
-
     measures:
       - name: count
         type: count
@@ -121,3 +97,18 @@ cubes:
         sql: CASE WHEN submitted_at IS NULL THEN 1 END
         type: count
         title: '# of in-progress entries'
+
+      - name: count_archived
+        sql: archived_at IS NOT NULL
+        type: count
+        title: '# of archived entries'
+
+      - name: count_resubmitted
+        sql: resubmitted_at IS NOT NULL
+        type: count
+        title: '# of resubmitted entries'
+
+      - name: count_resubmission_required
+        sql: resubmission_required_at IS NOT NULL
+        type: count
+        title: '# of resubmission required entries'
