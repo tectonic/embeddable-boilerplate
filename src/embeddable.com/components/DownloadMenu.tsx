@@ -140,13 +140,24 @@ const DownloadMenu: React.FC<Props> = (props) => {
   return (
     <>
       <div className="absolute top-0 right-0 z-5 flex items-center justify-end space-x-2 ">
-        <div onClick={handleSetShow} className="cursor-pointer relative w-3 flex justify-center">
+        <div onClick={handleSetShow} 
+              className={`cursor-pointer 
+              relative
+              flex 
+              justify-center
+              rounded-full
+              w-[26px] 
+              h-[26px] 
+              p-[4px]
+              hover:bg-[#106779]
+              ${showMenu ? 'bg-[#106779] outline outline-[#106779] outline-[3px] outline-offset-[3px]' : ''}
+        `}>
           {!preppingDownload && (
             <IconVerticalEllipsis className="cursor-pointer hover:opacity-100 opacity-50" />
           )}
           {showMenu && (
             <>
-              <div className="absolute border border-1 border-[#106779] bg-white flex items-center right-0 rounded shadow-md top-6 w-40 whitespace-nowrap">
+              <div className="absolute border border-1 border-[#106779] bg-white flex items-center right-0 rounded shadow-md top-[34px] w-40 whitespace-nowrap">
                 <ul className="w-full">
                   <li className="hover:bg-[#106779] px-[10px] py-[7px] w-full hover:text-white">
                     <a
