@@ -13,6 +13,9 @@ cubes:
         entries.deleted_at,
         entries.submitted_at,
         entries.created_at,
+        entries.archived_at,
+        entries.resubmitted_at,
+        entries.resubmission_required_at,
         entries.grant_status_id,
         categories.season_id AS category_season_id,
         categories.form_id AS category_form_id,
@@ -79,6 +82,30 @@ cubes:
       - name: submitted_at
         sql: submitted_at
         type: time
+
+      - name: archived_at
+        sql: archived_at
+        type: time
+
+      - name: resubmitted_at
+        sql: resubmitted_at
+        type: time
+
+      - name: resubmission_required_at
+        sql: resubmission_required_at
+        type: time
+
+      - name: Archived
+        type: boolean
+        sql: archived_at IS NOT NULL
+
+      - name: Resubmitted
+        type: boolean
+        sql: resubmitted_at IS NOT NULL
+
+      - name: Resubmission Required
+        type: boolean
+        sql: resubmission_required_at IS NOT NULL
 
     measures:
       - name: count
