@@ -1,0 +1,69 @@
+cubes:
+  - name: grant_reports_mysql
+    title: "Grant Reports (MySQL)"
+    data_source: mysql
+    sql: >
+      SELECT
+        grant_reports.id,
+        grant_reports.account_id,
+        grant_reports.season_id,
+        grant_reports.form_id,
+        grant_reports.due_date,
+        grant_reports.submitted_at,
+        grant_reports.values,
+        grant_reports.created_at
+      FROM grant_reports
+        INNER JOIN forms
+          ON grant_reports.form_id = forms.id
+            AND forms.deleted_at IS NULL
+            AND forms.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+      WHERE grant_reports.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+        AND grant_reports.deleted_at is null
+
+    joins:
+      - name: seasons_mysql
+        sql: "{CUBE}.season_id = {seasons_mysql}.id"
+        relationship: many_to_one
+
+      - name: forms_mysql
+        sql: "{CUBE}.form_id = {forms_mysql}.id"
+        relationship: many_to_one
+
+    dimensions:
+      - name: id
+        sql: id
+        type: number
+        primary_key: true
+
+      - name: status
+        type: string
+        case:
+          when:
+            - sql: '`submitted_at` IS NOT NULL'
+              label: Submitted
+            - sql: '`submitted_at` IS NULL AND `due_date` >= NOW() AND `values` IS NULL'
+              label: Scheduled
+            - sql: '`submitted_at` IS NULL AND `due_date` < NOW()'
+              label: Overdue
+            - sql: '`submitted_at` IS NULL AND `due_date` >= NOW() AND `values` IS NOT NULL'
+              label: 'In Progress'
+          else:
+            label: Unknown
+
+      - name: created_at
+        sql: created_at
+        type: time
+
+      - name: due_date
+        sql: due_date
+        type: time
+
+      - name: submitted_at
+        sql: submitted_at
+        type: time
+
+    measures:
+      - name: count
+        type: count
+        title: '# of grant reports'
+
