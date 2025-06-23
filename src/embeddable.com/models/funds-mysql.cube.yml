@@ -1,6 +1,6 @@
 cubes:
-  - name: fund_allocations_mysql
-    title: "Fund Allocations (MySQL)"
+  - name: funds_mysql
+    title: "Funds (MySQL)"
     data_source: mysql
     sql: >
       SELECT
