@@ -9,15 +9,14 @@ cubes:
         funds.budget,
         funds.allocated,
         funds.available,
-        translations.name,
-        translations.description,
+        translations.value AS name,
         funds.created_at
       FROM funds
         INNER JOIN translations
-          ON translations.id = funds.translation_id
+          ON translations.foreign_id = funds.id
             AND translations.resource = 'Fund'
             AND translations.field = 'name'
-            AND translations.language_id = '{ COMPILE_CONTEXT.securityContext.languageId }'
+            AND translations.language = '{ COMPILE_CONTEXT.securityContext.language }'
             AND translations.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
       WHERE funds.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
         AND funds.deleted_at is null
