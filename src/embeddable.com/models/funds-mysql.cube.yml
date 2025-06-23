@@ -46,16 +46,19 @@ cubes:
     measures:
       - name: sum_budget
         type: sum
+        sql: budget
         title: 'Total budget'
         format: currency
 
       - name: sum_allocated
         type: sum
+        sql: allocated
         title: 'Total allocated'
         format: currency
 
       - name: sum_available
         type: sum
+        sql: available
         title: 'Total available'
         format: currency
 
