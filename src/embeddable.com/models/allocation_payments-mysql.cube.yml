@@ -1,0 +1,87 @@
+cubes:
+  - name: allocation_payments_mysql
+    title: "Allocation Payments (MySQL)"
+    data_source: mysql
+    sql: >
+      SELECT
+        allocation_payments.id,
+        allocation_payments.season_id,
+        allocation_payments.allocation_id,
+        allocation_payments.entry_id,
+        allocation_payments.fund_id,
+        allocation_payments.payment_method_id,
+        allocation_payments.amount,
+        allocation_payments.currency,
+        allocation_payments.status,
+        allocation_payments.created_at
+        entries.form_id,
+        entries.category_id,
+        entries.chapter_id
+      FROM allocation_payments
+        INNER JOIN entries
+          ON entries.id = allocation_payments.entry_id
+            AND entries.deleted_at IS NULL
+            AND entries.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+      WHERE allocation_payments.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+        AND allocation_payments.deleted_at is null
+
+    joins:
+      - name: seasons_mysql
+        sql: "{CUBE}.season_id = {seasons_mysql}.id"
+        relationship: many_to_one
+
+      - name: entries_mysql
+        sql: "{CUBE}.entry_id = {entries_mysql}.id"
+        relationship: many_to_one
+
+      - name: forms_mysql
+        sql: "{CUBE}.form_id = {forms_mysql}.id"
+        relationship: many_to_one
+
+      - name: categories_mysql
+        sql: "{CUBE}.category_id = {categories_mysql}.id"
+        relationship: many_to_one
+
+      - name: chapters_mysql
+        sql: "{CUBE}.chapter_id = {chapters_mysql}.id"
+        relationship: many_to_one
+
+      - name: fund_allocations_mysql
+        sql: "{CUBE}.fund_allocation_id = {fund_allocations_mysql}.id"
+        relationship: many_to_one
+
+      - name: payment_methods_mysql
+        sql: "{CUBE}.payment_method_id = {payment_methods_mysql}.id"
+        relationship: many_to_one
+
+      - name: funds_mysql
+        sql: "{CUBE}.fund_id = {funds_mysql}.id"
+        relationship: many_to_one
+
+    dimensions:
+      - name: id
+        sql: id
+        type: number
+        primary_key: true
+
+      - name: status
+        type: string
+        sql: status
+
+      - name: currency
+        type: string
+        sql: currency
+
+      - name: created_at
+        sql: created_at
+        type: time
+
+    measures:
+      - name: sum_amount
+        type: sum
+        title: 'Total amount'
+        format: currency
+
+      - name: count
+        type: count
+        title: '# of allocation payments'
