@@ -1,0 +1,65 @@
+cubes:
+  - name: fund_allocations_mysql
+    title: "Fund Allocations (MySQL)"
+    data_source: mysql
+    sql: >
+      SELECT
+        funds.id,
+        funds.currency,
+        funds.budget,
+        funds.allocated,
+        funds.available,
+        translations.name,
+        translations.description,
+        funds.created_at
+      FROM funds
+        INNER JOIN translations
+          ON translations.id = funds.translation_id
+            AND translations.resource = 'Fund'
+            AND translations.field = 'name'
+            AND translations.language_id = '{ COMPILE_CONTEXT.securityContext.languageId }'
+            AND translations.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+      WHERE funds.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+        AND funds.deleted_at is null
+
+    dimensions:
+      - name: id
+        sql: id
+        type: number
+        primary_key: true
+
+      - name: name
+        type: string
+        sql: name
+
+      - name: description
+        type: string
+        sql: description
+
+      - name: currency
+        type: string
+        sql: currency
+
+      - name: created_at
+        sql: created_at
+        type: time
+
+    measures:
+      - name: sum_budget
+        type: sum
+        title: 'Total budget'
+        format: currency
+
+      - name: sum_allocated
+        type: sum
+        title: 'Total allocated'
+        format: currency
+
+      - name: sum_available
+        type: sum
+        title: 'Total available'
+        format: currency
+
+      - name: count
+        type: count
+        title: '# of funds'

@@ -1,0 +1,80 @@
+cubes:
+  - name: fund_allocations_mysql
+    title: "Fund Allocations (MySQL)"
+    data_source: mysql
+    sql: >
+      SELECT
+        fund_allocations.id,
+        fund_allocations.fund_id,
+        fund_allocations.entry_id,
+        fund_allocations.season_id,
+        fund_allocations.amount,
+        funds.currency,
+        fund_allocations.created_at
+        entries.form_id,
+        entries.category_id,
+        entries.chapter_id
+      FROM fund_allocations
+        INNER JOIN entries
+          ON entries.id = fund_allocations.entry_id
+            AND entries.deleted_at IS NULL
+            AND entries.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+        INNER JOIN funds
+          ON funds.id = fund_allocations.fund_id
+            AND funds.deleted_at IS NULL
+            AND funds.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+      WHERE fund_allocations.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+        AND fund_allocations.deleted_at is null
+
+    joins:
+      - name: seasons_mysql
+        sql: "{CUBE}.season_id = {seasons_mysql}.id"
+        relationship: many_to_one
+
+      - name: entries_mysql
+        sql: "{CUBE}.entry_id = {entries_mysql}.id"
+        relationship: many_to_one
+
+      - name: forms_mysql
+        sql: "{CUBE}.form_id = {forms_mysql}.id"
+        relationship: many_to_one
+
+      - name: categories_mysql
+        sql: "{CUBE}.category_id = {categories_mysql}.id"
+        relationship: many_to_one
+
+      - name: chapters_mysql
+        sql: "{CUBE}.chapter_id = {chapters_mysql}.id"
+        relationship: many_to_one
+
+      - name: funds_mysql
+        sql: "{CUBE}.fund_id = {funds_mysql}.id"
+        relationship: many_to_one
+
+    dimensions:
+      - name: id
+        sql: id
+        type: number
+        primary_key: true
+
+      - name: status
+        type: string
+        sql: status
+
+      - name: currency
+        type: string
+        sql: currency
+
+      - name: created_at
+        sql: created_at
+        type: time
+
+    measures:
+      - name: sum_amount
+        type: sum
+        title: 'Total amount'
+        format: currency
+
+      - name: count
+        type: count
+        title: '# of allocation payments'
