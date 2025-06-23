@@ -74,6 +74,7 @@ cubes:
         type: sum
         title: 'Total amount'
         format: currency
+        sql: amount
 
       - name: count
         type: count
