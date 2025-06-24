@@ -70,10 +70,18 @@ cubes:
         type: string
         case:
           when:
-            - sql: submitted_at IS NOT NULL
+            - sql: submitted_at IS NOT NULL AND resubmission_required_at IS NULL
               label: Submitted
+            - sql: submitted_at IS NULL AND resubmission_required_at IS NULL AND resubmitted_at IS NULL AND invited_at IS NULL
+              label: In-Progress
+            - sql: resubmission_required_at IS NOT NULL AND resubmitted_at IS NULL
+              label: Resubmission Required
+            - sql: resubmitted_at IS NOT NULL
+              label: Resubmitted
+            - sql: invited_at IS NOT NULL
+              label: Invited
           else:
-            label: In-Progress
+            label: Other
 
       - name: created_at
         sql: created_at
@@ -89,26 +97,31 @@ cubes:
         title: '# of entries'
 
       - name: count_submitted
-        sql: submitted_at
+        sql: CASE WHEN submitted_at IS NOT NULL AND resubmission_required_at IS NULL THEN 1 END
         type: count
         title: '# of submitted entries'
 
       - name: count_in_progress
-        sql: CASE WHEN submitted_at IS NULL THEN 1 END
+        sql: CASE WHEN submitted_at IS NULL AND resubmission_required_at IS NULL AND resubmitted_at IS NULL AND invited_at IS NULL THEN 1 END
         type: count
         title: '# of in-progress entries'
 
-      - name: count_archived
-        sql: archived_at IS NOT NULL
+      - name: count_resubmission_required
+        sql: CASE WHEN resubmission_required_at IS NOT NULL AND resubmitted_at IS NULL THEN 1 END
         type: count
-        title: '# of archived entries'
+        title: '# of resubmission required entries'
 
       - name: count_resubmitted
-        sql: resubmitted_at IS NOT NULL
+        sql: CASE WHEN resubmitted_at IS NOT NULL THEN 1 END
         type: count
         title: '# of resubmitted entries'
 
-      - name: count_resubmission_required
-        sql: resubmission_required_at IS NOT NULL
+      - name: count_invited
+        sql: CASE WHEN invited_at IS NOT NULL THEN 1 END
         type: count
-        title: '# of resubmission required entries'
+        title: '# of invited entries'
+
+      - name: count_archived
+        sql: CASE WHEN archived_at IS NOT NULL THEN 1 END
+        type: count
+        title: '# of archived entries'
