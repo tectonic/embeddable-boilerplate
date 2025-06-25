@@ -19,6 +19,19 @@ cubes:
           ON entries.id = fund_allocations.entry_id
             AND entries.deleted_at IS NULL
             AND entries.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+        INNER JOIN categories
+          ON entries.category_id = categories.id
+            AND categories.rgt - categories.lft = 1
+            AND categories.deleted_at IS NULL
+            AND categories.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+        INNER JOIN chapters
+          ON entries.chapter_id = chapters.id
+            AND chapters.deleted_at IS NULL
+            AND chapters.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+        INNER JOIN forms
+          ON entries.form_id = forms.id
+            AND forms.deleted_at IS NULL
+            AND forms.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
         INNER JOIN funds
           ON funds.id = fund_allocations.fund_id
             AND funds.deleted_at IS NULL
