@@ -46,7 +46,7 @@ cubes:
             - sql: '`submitted_at` IS NULL AND `due_date` < NOW()'
               label: Overdue
             - sql: '`submitted_at` IS NULL AND `due_date` >= NOW() AND `values` IS NOT NULL'
-              label: 'In Progress'
+              label: 'In progress'
           else:
             label: Unknown
 
@@ -65,5 +65,5 @@ cubes:
     measures:
       - name: count
         type: count
-        title: '# of grant reports'
+        title: 'Qty grant reports'
 

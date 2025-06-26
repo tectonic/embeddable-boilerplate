@@ -78,14 +78,14 @@ cubes:
     measures:
       - name: count
         type: count
-        title: '# of entries'
+        title: 'Qty entries'
 
       - name: count_submitted
         sql: entries.submitted_at
         type: count
-        title: '# of submitted entries'
+        title: 'Qty submitted'
 
       - name: count_in_progress
         sql: CASE WHEN entries.submitted_at IS NULL THEN 1 END
         type: count
-        title: '# of in-progress entries'
+        title: 'Qty in progress'
