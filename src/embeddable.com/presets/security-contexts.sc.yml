@@ -1,27 +1,17 @@
-- name: Individual1564
+- name: Hedgehogs (Staging)
+  environment: staging-eu
   securityContext:
-    GroupID: Individual1564
-    canSeeOwnSchool: true
-    CanReadNames: true
-    SchoolID: [1564]
-    RestrictedToOneSchool: false
-  environment: default
+    accountId: 371
+    language: en_GB
 
-- name: TTCT
+- name: "Jackson's Art Prize (UAT)"
+  environment: uat-eu
   securityContext:
-    GroupID: Group2
-    canSeeOwnSchool: true
-    CanReadNames: true
-    SchoolID: [256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 828]
-    RestrictedToOneSchool: false
-  environment: default
+    accountId: 244
+    language: en_GB
 
-- name: dev_group
+- name: "Configure (Production)"
+  environment: production-eu
   securityContext:
-    GroupID: dev_global_dataset
-  environment: default
-
-- name: dev_group_2
-  securityContext:
-    GroupID: dev_global_dataset_2
-  environment: default
+    accountId: 637
+    language: en_GB
