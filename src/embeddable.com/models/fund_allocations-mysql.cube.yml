@@ -10,7 +10,7 @@ cubes:
         fund_allocations.season_id,
         fund_allocations.amount,
         funds.currency,
-        fund_allocations.created_at
+        fund_allocations.created_at,
         entries.form_id,
         entries.category_id,
         entries.chapter_id
