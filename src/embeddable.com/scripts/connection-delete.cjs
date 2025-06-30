@@ -6,7 +6,7 @@ const BASE_URL = 'https://api.us.embeddable.com'; // US
 
 async function run() {
   const resp = await fetch(`${BASE_URL}/api/v1/connections/${connectionName}`, {
-    method: 'DELETE', // PUT = UPDATE
+    method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
