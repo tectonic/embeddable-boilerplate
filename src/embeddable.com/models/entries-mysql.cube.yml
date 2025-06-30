@@ -94,34 +94,34 @@ cubes:
     measures:
       - name: count
         type: count
-        title: '# of entries'
+        title: 'Qty entries'
 
       - name: count_submitted
         sql: CASE WHEN submitted_at IS NOT NULL AND resubmission_required_at IS NULL THEN 1 END
         type: count
-        title: '# of submitted entries'
+        title: 'Qty submitted'
 
       - name: count_in_progress
         sql: CASE WHEN submitted_at IS NULL AND resubmission_required_at IS NULL AND resubmitted_at IS NULL AND invited_at IS NULL THEN 1 END
         type: count
-        title: '# of in-progress entries'
+        title: 'Qty in progress'
 
       - name: count_resubmission_required
         sql: CASE WHEN resubmission_required_at IS NOT NULL AND resubmitted_at IS NULL THEN 1 END
         type: count
-        title: '# of resubmission required entries'
+        title: 'Qty resubmission required'
 
       - name: count_resubmitted
         sql: CASE WHEN resubmitted_at IS NOT NULL THEN 1 END
         type: count
-        title: '# of resubmitted entries'
+        title: 'Qty resubmitted'
 
       - name: count_invited
         sql: CASE WHEN invited_at IS NOT NULL THEN 1 END
         type: count
-        title: '# of invited entries'
+        title: 'Qty invited'
 
       - name: count_archived
         sql: CASE WHEN archived_at IS NOT NULL THEN 1 END
         type: count
-        title: '# of archived entries'
+        title: 'Qty archived'
