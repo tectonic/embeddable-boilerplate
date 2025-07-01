@@ -16,7 +16,7 @@ import Component from './index';
 export const meta = {
   name: 'ExamplePieChart',
   label: 'Example Pie Chart',
-  classNames: ['add-border'],
+  classNames: ['inside-card'],
   category: 'Examples',
   inputs: [
     {
