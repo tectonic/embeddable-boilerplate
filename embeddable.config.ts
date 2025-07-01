@@ -23,7 +23,7 @@ export default defineConfig({
    * in the sample components without getting theme errors, but doesn't add any of the vanilla components
    */
   componentLibraries: [
-    { name: '@embeddable.com/vanilla-components', include: [] },
+    { name: '@embeddable.com/vanilla-components', include: [''] },
   ],
 
   //For internal use only (this helps us help you debug issues)
