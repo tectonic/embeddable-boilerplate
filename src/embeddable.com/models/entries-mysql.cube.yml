@@ -12,6 +12,7 @@ cubes:
         entries.account_id,
         entries.deleted_at,
         entries.submitted_at,
+        entries.invited_at,
         entries.created_at,
         entries.archived_at,
         entries.resubmitted_at,
