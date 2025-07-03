@@ -2,6 +2,7 @@ cubes:
   - name: customers
     title: My customers
     sql_table: public.customers
+    data_source: default
 
     # You can specificy custom SQL with which to query the table, if desired. Otherwise
     # it will default to `select * from public.customers`
