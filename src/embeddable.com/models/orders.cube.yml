@@ -1,6 +1,7 @@
 cubes:
   - name: orders
     sql_table: public.orders
+    data_source: default
 
     dimensions:
       - name: id
