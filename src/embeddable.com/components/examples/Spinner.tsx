@@ -4,10 +4,10 @@ const loaderStyle: React.CSSProperties = {
   border: "4px solid #f3f3f3",
   borderTop: "4px solid rgb(101, 101, 101)",
   borderRadius: "50%",
-  width: "30px",
-  height: "30px",
+  width: "20px",
+  height: "20px",
   animation: "spin 2s linear infinite",
-  margin: "20px auto",
+  margin: "4px auto",
 };
 
 const Spinner: React.FC = () => (

@@ -17,6 +17,7 @@ import {
   Legend,
 } from 'chart.js';
 import Spinner from '../Spinner';
+import Error from '../Error';
 import { Pie } from 'react-chartjs-2';
 import { Dimension, Measure, Dataset } from '@embeddable.com/core';
 import { DataResponse } from '@embeddable.com/core';
@@ -88,7 +89,7 @@ export default (props: Props) => {
     return <Spinner/>;
   }
   if (error) {
-    return <div style={{ color: 'red' }}>Error: {error}</div>;
+    return <Error msg={error}/>;
   }
 
   // Chart.js pie expects labels like so: ['US', 'UK', 'Germany']

@@ -59,8 +59,7 @@ export default defineComponent(Component, meta, {
       ...inputs,
       results: loadData({
         from: inputs.ds,
-        dimensions: [inputs.slice],
-        measures: [inputs.metric],
+        select: [inputs.slice, inputs.metric]
       }),
     };
   },
