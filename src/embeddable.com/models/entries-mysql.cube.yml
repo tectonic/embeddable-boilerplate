@@ -12,7 +12,11 @@ cubes:
         entries.account_id,
         entries.deleted_at,
         entries.submitted_at,
+        entries.invited_at,
         entries.created_at,
+        entries.archived_at,
+        entries.resubmitted_at,
+        entries.resubmission_required_at,
         entries.grant_status_id,
         categories.season_id AS category_season_id,
         categories.form_id AS category_form_id,
@@ -67,10 +71,18 @@ cubes:
         type: string
         case:
           when:
-            - sql: submitted_at IS NOT NULL
+            - sql: submitted_at IS NOT NULL AND resubmission_required_at IS NULL
               label: Submitted
+            - sql: submitted_at IS NULL AND resubmission_required_at IS NULL AND resubmitted_at IS NULL AND invited_at IS NULL
+              label: In progress
+            - sql: resubmission_required_at IS NOT NULL AND resubmitted_at IS NULL
+              label: Resubmission required
+            - sql: resubmitted_at IS NOT NULL
+              label: Resubmitted
+            - sql: invited_at IS NOT NULL
+              label: Invited
           else:
-            label: In progress
+            label: Other
 
       - name: created_at
         sql: created_at
@@ -86,11 +98,31 @@ cubes:
         title: 'Qty entries'
 
       - name: count_submitted
-        sql: submitted_at
+        sql: CASE WHEN submitted_at IS NOT NULL AND resubmission_required_at IS NULL THEN 1 END
         type: count
         title: 'Qty submitted'
 
       - name: count_in_progress
-        sql: CASE WHEN submitted_at IS NULL THEN 1 END
+        sql: CASE WHEN submitted_at IS NULL AND resubmission_required_at IS NULL AND resubmitted_at IS NULL AND invited_at IS NULL THEN 1 END
         type: count
         title: 'Qty in progress'
+
+      - name: count_resubmission_required
+        sql: CASE WHEN resubmission_required_at IS NOT NULL AND resubmitted_at IS NULL THEN 1 END
+        type: count
+        title: 'Qty resubmission required'
+
+      - name: count_resubmitted
+        sql: CASE WHEN resubmitted_at IS NOT NULL THEN 1 END
+        type: count
+        title: 'Qty resubmitted'
+
+      - name: count_invited
+        sql: CASE WHEN invited_at IS NOT NULL THEN 1 END
+        type: count
+        title: 'Qty invited'
+
+      - name: count_archived
+        sql: CASE WHEN archived_at IS NOT NULL THEN 1 END
+        type: count
+        title: 'Qty archived'
