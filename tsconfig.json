@@ -22,6 +22,6 @@
         "paths": {
             "@embeddable.com/sdk-react": ["node_modules/@embeddable.com/sdk-react"],
             "@embeddable.com/sdk-core": ["node_modules/@embeddable.com/sdk-core"]
-        },
+        }
     }
 }
