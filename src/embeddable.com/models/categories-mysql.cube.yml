@@ -12,11 +12,16 @@ cubes:
         categories.deleted_at,
         translations.value AS name
       FROM categories
+        INNER JOIN forms
+          ON categories.form_id = forms.id
+            AND forms.deleted_at IS NULL
+            AND forms.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
         LEFT JOIN translations
           ON categories.id = translations.foreign_id
             AND translations.resource = 'Category'
             AND translations.language = '{ COMPILE_CONTEXT.securityContext.language }'
             AND translations.field = 'name'
+            AND translations.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
       WHERE categories.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
         AND categories.deleted_at IS NULL
 
