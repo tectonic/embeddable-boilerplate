@@ -5,7 +5,7 @@ cubes:
     sql: >
       SELECT
         tags.id,
-        tags.tag,
+        tags.tag
       FROM tags
       WHERE tags.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
 
