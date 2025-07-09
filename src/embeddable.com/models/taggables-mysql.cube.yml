@@ -1,0 +1,33 @@
+cubes:
+  - name: taggables_mysql
+    title: "Taggables (MySQL)"
+    data_source: mysql
+    sql: >
+      SELECT
+        taggables.id,
+        taggables.tag_id,
+      FROM taggables
+        INNER JOIN tags
+          ON taggables.tag_id = tags.id
+            AND tags.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+      WHERE taggables.taggable_type IN (
+        'AwardForce\\\\Modules\\\\Entries\\\\Models\\\\Entry',
+        'AwardForce\\\\Modules\\\\GrantReports\\\\Models\\\\GrantReport',
+        'AwardForce\\\\Modules\\\\Funding\\\\Data\\\\Allocation'
+      )
+
+    joins:
+      - name: tags_mysql
+        sql: "{CUBE}.tag_id = {tags_mysql}.id"
+        relationship: many_to_one
+
+    dimensions:
+      - name: id
+        sql: id
+        type: number
+        primary_key: true
+
+    measures:
+      - name: count
+        type: count
+        title: 'Qty taggables'
