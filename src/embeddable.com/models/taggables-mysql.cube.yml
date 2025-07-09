@@ -5,6 +5,8 @@ cubes:
     sql: >
       SELECT
         taggables.tag_id,
+        taggables.taggable_id,
+        taggables.taggable_type
       FROM taggables
         INNER JOIN tags
           ON taggables.tag_id = tags.id
@@ -25,6 +27,19 @@ cubes:
         sql: "CONCAT(tag_id, '_', taggable_id, '_', taggable_type)"
         type: string
         primary_key: true
+
+      - name: taggable_type
+        type: string
+        case:
+          when:
+            - sql: taggable_type = 'AwardForce\\\\Modules\\\\Entries\\\\Models\\\\Entry'
+              label: Entry
+            - sql: taggable_type = 'AwardForce\\\\Modules\\\\GrantReports\\\\Models\\\\GrantReport'
+              label: Grant report
+            - sql: taggable_type = 'AwardForce\\\\Modules\\\\Funding\\\\Data\\\\Allocation'
+              label: Allocation
+          else:
+            label: Other
 
     measures:
       - name: count
