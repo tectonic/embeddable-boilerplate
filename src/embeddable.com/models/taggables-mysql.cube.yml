@@ -4,7 +4,6 @@ cubes:
     data_source: mysql
     sql: >
       SELECT
-        taggables.id,
         taggables.tag_id,
       FROM taggables
         INNER JOIN tags
@@ -23,8 +22,8 @@ cubes:
 
     dimensions:
       - name: id
-        sql: id
-        type: number
+        sql: "CONCAT(tag_id, '_', taggable_id, '_', taggable_type)"
+        type: string
         primary_key: true
 
     measures:
