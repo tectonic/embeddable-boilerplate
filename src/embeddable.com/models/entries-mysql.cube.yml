@@ -69,6 +69,7 @@ cubes:
         primary_key: true
 
       - name: completion_status
+        title: Completion status
         type: string
         case:
           when:
@@ -86,6 +87,7 @@ cubes:
             label: Other
 
       - name: moderation_status
+        title: Moderation status
         type: string
         case:
           # capitalize the enum cases so it displays better in the UI
