@@ -18,6 +18,7 @@ cubes:
         entries.resubmitted_at,
         entries.resubmission_required_at,
         entries.grant_status_id,
+        entries.moderation_status,
         categories.season_id AS category_season_id,
         categories.form_id AS category_form_id,
         chapters.season_id AS chapter_season_id
@@ -81,6 +82,20 @@ cubes:
               label: Resubmitted
             - sql: invited_at IS NOT NULL
               label: Invited
+          else:
+            label: Other
+
+      - name: moderation_status
+        type: string
+        case:
+          # capitalize the enum cases so it displays better in the UI
+          when:
+            - sql: moderation_status = 'approved'
+              label: Approved
+            - sql: moderation_status = 'rejected'
+              label: Rejected
+            - sql: moderation_status = 'undecided'
+              label: Undecided
           else:
             label: Other
 
