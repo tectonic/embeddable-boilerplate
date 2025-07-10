@@ -1,8 +1,3 @@
-/*
- * This file contains the styles for the ExampleTextInput component.
- *
- * You can delete this folder once you move to Vanilla Components post-Onboarding
- */
 export const inputStyles: React.CSSProperties = {
   border: '1px solid #ddd',
   borderRadius: '4px',

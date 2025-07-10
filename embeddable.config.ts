@@ -4,27 +4,23 @@ import react from '@embeddable.com/sdk-react';
 export default defineConfig({
   plugins: [react],
 
-  // uncomment for EU deployments
+  /* 
+   * uncomment for EU deployments
+   */
   // region: 'EU',
 
-  // uncomment for US deployments
+  /* 
+   * uncomment for US deployments
+   */
   // region: 'US',
 
-  /* After you've finished the onboarding, you can uncomment the following line to
-   * use ALL vanilla components. If you use this, make sure to remove the lower
-   * "componentLibraries" line as well, or you'll get an error.
-   * /
+  /* 
+   * Uncomment use ALL vanilla components. 
+   */
   // componentLibraries: ['@embeddable.com/vanilla-components'],
 
-  /* If you want to use only specific vanilla components, you have two options:
-   *   1. You can use "include" to specify which components you want to use
-   *   2. You can use "exclude" to specify which components you want to exclude
-   * We're currently including an empty array as this allows you to import the Embeddable container
-   * in the sample components without getting theme errors, but doesn't add any of the vanilla components
-   */
-  componentLibraries: [
-    { name: '@embeddable.com/vanilla-components', include: [] },
-  ],
+
+
 
   //For internal use only (this helps us help you debug issues)
   //
