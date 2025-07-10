@@ -5,8 +5,7 @@
  * You can delete this folder once you move to Vanilla Components post-Onboarding
  */
 import React, { useState } from 'react';
-import { Container } from '@embeddable.com/vanilla-components';
-import { inputStyles, labelStyles, labelTopStyles } from './styles';
+import { inputStyles, labelStyles, labelTopStyles } from '../styles';
 
 type Change = (text: string) => void;
 
@@ -33,7 +32,7 @@ export default (props: Props) => {
   };
 
   return (
-    <Container>
+    <>
       <label style={labelTopStyles}>
         <span style={labelStyles}>{label}</span>
         <input
@@ -43,6 +42,6 @@ export default (props: Props) => {
           onChange={(e) => handleChange(e.target.value)}
         />
       </label>
-    </Container>
+    </>
   );
 };

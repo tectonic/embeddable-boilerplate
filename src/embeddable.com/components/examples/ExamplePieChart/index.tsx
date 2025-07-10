@@ -16,10 +16,11 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import Spinner from '../Spinner';
+import Error from '../Error';
 import { Pie } from 'react-chartjs-2';
 import { Dimension, Measure, Dataset } from '@embeddable.com/core';
 import { DataResponse } from '@embeddable.com/core';
-import { Container } from '@embeddable.com/vanilla-components';
 
 ChartJS.register(
   CategoryScale,
@@ -85,10 +86,10 @@ export default (props: Props) => {
   const { isLoading, data, error } = results;
 
   if (isLoading) {
-    return <div>Loading &hellip;</div>;
+    return <Spinner/>;
   }
   if (error) {
-    return <div style={{ color: 'red' }}>Error: {error}</div>;
+    return <Error msg={error}/>;
   }
 
   // Chart.js pie expects labels like so: ['US', 'UK', 'Germany']
@@ -98,11 +99,12 @@ export default (props: Props) => {
   const counts = data?.map((d) => d[metric.name]);
 
   return (
-    <Container>
+    <>
       <Pie
         options={chartOptions(showLegend)}
         data={chartData(labels, counts)}
+        height="100%"
       />
-    </Container>
+    </>
   );
 };

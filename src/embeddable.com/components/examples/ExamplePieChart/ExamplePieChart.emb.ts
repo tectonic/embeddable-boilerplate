@@ -16,7 +16,7 @@ import Component from './index';
 export const meta = {
   name: 'ExamplePieChart',
   label: 'Example Pie Chart',
-  classNames: ['add-border'],
+  classNames: ['inside-card'],
   category: 'Examples',
   inputs: [
     {
@@ -59,8 +59,7 @@ export default defineComponent(Component, meta, {
       ...inputs,
       results: loadData({
         from: inputs.ds,
-        dimensions: [inputs.slice],
-        measures: [inputs.metric],
+        select: [inputs.slice, inputs.metric]
       }),
     };
   },
