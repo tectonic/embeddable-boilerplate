@@ -1,0 +1,29 @@
+cubes:
+  - name: grant_statuses_mysql
+    title: "Grant Statuses (MySQL)"
+    data_source: mysql
+    sql: >
+      SELECT
+        grant_statuses.id,
+        translations.value AS name
+      FROM grant_statuses
+        LEFT JOIN translations
+          ON grant_statuses.id = translations.foreign_id
+            AND translations.resource = 'GrantStatus'
+            AND translations.language = '{ COMPILE_CONTEXT.securityContext.language }'
+            AND translations.field = 'name'
+      WHERE grant_statuses.account_id = '{ COMPILE_CONTEXT.securityContext.accountId }'
+        AND grant_statuses.deleted_at IS NULL
+      ORDER BY `order` ASC
+
+    dimensions:
+      - name: id
+        sql: id
+        type: number
+        primary_key: true
+
+      - name: name
+        title: 'Grant Status'
+        sql: name
+        type: string
+

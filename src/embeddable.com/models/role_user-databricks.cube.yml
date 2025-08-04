@@ -43,4 +43,4 @@ cubes:
     measures:
       - name: count
         type: count
-        title: '# of users'
+        title: 'Qty users'

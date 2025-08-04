@@ -7,7 +7,9 @@ export default defineConfig({
   // uncomment for EU deployments
   region: 'EU',
 
-  // uncomment for US deployments
+  /* 
+   * uncomment for US deployments
+   */
   // region: 'US',
 
   /* Uncomment this line after you have finished the onboarding */
@@ -16,14 +18,8 @@ export default defineConfig({
     exclude: ['TableChart', 'PivotTable'],
   }],
 
-  /* Note: if you wish to include only certain components from a library, you can specify
-   * them like so:
-   *
-   * componentLibraries: [{
-   *   name: '@embeddable.com/vanilla-components',
-   *   include: ['BarChart', 'DateRangePicker']
-   * }],
-   */
+
+
 
   //For internal use only (this helps us help you debug issues)
   //
