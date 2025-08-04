@@ -1,27 +1,17 @@
-# Security Context is private info that can be used to customize the embeddable experience.
-# This context is only accessible within Cube models and enables row-level security. Note
-# that this file is only used by the builder.
-# See https://docs.embeddable.com/data-modeling/row-level-security
-- name: Example customer 1
+- name: Hedgehogs (Staging)
+  environment: staging-eu
   securityContext:
-    country: United States
-    language: English
-  environment: default
+    accountId: 371
+    language: en_GB
 
-- name: Example customer 2
+- name: "Jackson's Art Prize (UAT)"
+  environment: uat-eu
   securityContext:
-    country: Germany
-    language: German
-  environment: default
+    accountId: 244
+    language: en_GB
 
-- name: Example customer 3
+- name: "Configure (Production)"
+  environment: production-eu
   securityContext:
-    country: United Kingdom
-    language: English
-  environment: default
-
-- name: Example customer 4
-  securityContext:
-    country: France
-    language: French
-  environment: default
+    accountId: 637
+    language: en_GB

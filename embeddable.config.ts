@@ -4,20 +4,19 @@ import react from '@embeddable.com/sdk-react';
 export default defineConfig({
   plugins: [react],
 
-  /* 
-   * uncomment for EU deployments
-   */
-  // region: 'EU',
+  // uncomment for EU deployments
+  region: 'EU',
 
   /* 
    * uncomment for US deployments
    */
   // region: 'US',
 
-  /* 
-   * Uncomment use ALL vanilla components. 
-   */
-  // componentLibraries: ['@embeddable.com/vanilla-components'],
+  /* Uncomment this line after you have finished the onboarding */
+  componentLibraries: [{
+    name: '@embeddable.com/vanilla-components',
+    exclude: ['TableChart', 'PivotTable'],
+  }],
 
 
 
